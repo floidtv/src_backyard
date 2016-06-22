@@ -1,0 +1,57 @@
+<template name="audioEdit">
+    <form class="ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Audio</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="four wide field">
+                            <label>Campus Records Mitarbeiter</label>
+                        </div>
+                        <div class="four wide field">
+                            <select name="taggedUsers" class="ui dropdown" id="audioUser">
+                                {{#each userList}}
+                                    <option id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                                <div class="ui negative medium button" id="remove_AudioUser">
+                                    <i class="remove user icon"></i>
+                                </div>
+                                <div class="ui positive medium button" id="add_AudioUser">
+                                    <i class="add user icon"></i>
+                                </div>
+                        {{crUser}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <label>Besonderheiten</label>
+                        <textarea id="audiobesonderheiten" placeholder="Besonderheiten">{{production.audioBesonderheiten}}</textarea>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <input class="ui right floated green button" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>

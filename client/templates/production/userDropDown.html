@@ -1,0 +1,23 @@
+<template name="userDropDown">
+    <div class="ui form">
+    <div class="inline fields">
+        <div class="eight wide field">
+            <select name="taggedUsers" class="ui dropdown" id="multi-select" size="21px">
+
+            {{# each userList}}
+                <option id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+            {{/each}}
+                </select>
+            </div>
+        <div class="three wide field">
+        <div class="ui positive medium button" id="addUser">
+            <i class="add user icon"></i>
+        </div>
+            <div class="ui negative medium button" id="removeUser">
+                <i class="remove user icon"></i>
+            </div>
+            </div>
+    </div>
+
+    </div>
+</template>

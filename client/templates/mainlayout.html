@@ -1,0 +1,61 @@
+<template name="mainlayout">
+    <style>
+        .pusher {background: rgb(43,43,43) !important;}
+        body {background: rgb(43,43,43) !important;}
+    </style>
+    {{#if currentUser}}
+        <div class="ui top attached inverted demo menu">
+            <a class="item menu">
+                <i class="sidebar icon"></i>
+                Menu
+            </a>
+            <a class="right floated item logout">
+                <i class="toggle right icon"></i>
+                Logout
+            </a>
+            <p class="white item">Willkommen {{currentUser.profile.firstname}}</p>
+
+        </div>
+        <div class="ui bottom attached segment pushable">
+            <div style="" class="ui inverted labeled icon left inline vertical sidebar menu">
+                <a class="item" href="/"><i class="home icon"></i>
+                    Projektübersicht
+                </a>
+                <a class="item" href="/ideas"><i class="idea icon"></i>
+                    Ideenentwicklung
+                </a>
+                <a class="item" href="/cal"><i class="calendar icon"></i>
+                    Kalender
+                </a>
+                <a class="item" href="/user"><i class="archive icon"></i>
+                    Archiv
+                </a>
+                <a class="item" href="/user"><i class="users icon"></i>
+                    Mitglieder
+                </a>
+                {{#if isInRole 'Admin'}}
+                <a class="item" href="/intern"><i class="lock icon"></i>
+                    Interner Bereich
+                </a>
+                {{/if}}
+                <!--
+                <a class="item" href="/user"><i class="bar chart icon"></i>
+                    Statistiken
+                </a>
+                <a class="item" href="/demo"><i class="edit icon"></i>
+                    Benutzerprofil
+                </a> -->
+            </div>
+
+            <div class="pusher">
+                <div class="ui basic segment">
+                    {{> yield}}
+                </div>
+            </div>
+        </div>
+    {{else}}
+        {{> login}}
+        {{!-> resetPassword--}}
+        {{!-> forgotPassword--}}
+    {{/if}}
+</template>

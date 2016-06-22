@@ -1,0 +1,186 @@
+<template name="calendar">
+    <style>
+        .bootstrap-datetimepicker-widget {
+            color: #000;
+        }
+    </style>
+    <div class="ui stackable grid container">
+        <div class="one column row">
+            <div class="column"></div>
+        </div>
+        <div class="one black column row">
+            <div class="column">
+                <h1 class="ui grey inverted centered large header">Terminkalender</h1>
+                <div id="calendar"> <!-- Hier verbirgt sich der Kalender --></div>
+            </div>
+        </div>
+        <div class="seven column row">
+            <div class="black column"><a class="ui red circular label"></a>Ausstrahlung</div>
+            <div class="black column"><a class="ui orange circular label"></a>Treatment</div>
+            <div class="black column"><a class="ui teal circular label"></a>Offtext-Termin</div>
+            <div class="black column"><a class="ui blue circular label"></a>Drehtermin</div>
+            <div class="black column"><a class="ui purple circular label"></a>Schnitttermin</div>
+            <div class="black column"><a class="ui green circular label"></a>Sonstige Termine</div>
+            <div class="black column"><a class="ui grey circular label"></a>Ideen</div>
+        </div>
+        <div class="six column row">
+            <div class="two wide black center aligned column">
+                <div class="ui fitted checkbox">
+                    <input type="checkbox" class='filterCheck' checked data-value="0">
+                    <label></label>
+                </div>
+            </div>
+            <div class="two wide black center aligned column">
+                <div class="ui fitted checkbox">
+                    <input type="checkbox" class='filterCheck' checked data-value="1">
+                    <label></label>
+                </div>
+            </div>
+            <div class="three wide black center aligned column">
+                <div class="ui fitted checkbox">
+                    <input type="checkbox" class='filterCheck' checked data-value="2">
+                    <label></label>
+                </div>
+            </div>
+            <div class="two wide black center aligned column">
+                <div class="ui fitted checkbox">
+                    <input type="checkbox" class='filterCheck' checked data-value="3">
+                    <label></label>
+                </div>
+            </div>
+            <div class="two wide black center aligned column">
+                <div class="ui fitted checkbox">
+                    <input type="checkbox" class='filterCheck' checked data-value="4">
+                    <label></label>
+                </div>
+            </div>
+
+            {{>autocomplete}}
+
+
+
+        </div>
+        <div class="one black column row"></div>
+    </div>
+    <form class="ui inverted form">
+    <div class="ui stackable grid container">
+        <div class="black one column row">
+            <div class="column">
+                    <h4 class="ui orange header">Neuen Termin anlegen</h4>
+            </div>
+        </div>
+        <div class="black two column row">
+            <div class="twelve wide column">
+                <h5 class="ui orange header">Titel</h5>
+            </div>
+            <div class="four wide column">
+                <h5 class="ui orange small header">Datum</h5>
+            </div>
+        </div>
+        <div class="black two column row">
+            <div class="twelve wide column">
+                <input name="eventName" placeholder="Titel" type="text" value="">
+            </div>
+            <div class="four wide column">
+                <input name="eventDate" class="ui dropdown datetimepicker" type="text" id="date">
+            </div>
+        </div>
+        <div class="black two column row">
+            <div class="twelve wide column">
+                <h5 class="ui orange small header">Beschreibung</h5>
+            </div>
+            <div class="four wide column">
+
+            </div>
+        </div>
+        <div class="black two column row">
+            <div class="twelve wide column">
+                <textarea id="eventDescription" placeholder="Beschreibung"></textarea>
+            </div>
+            <div class="four wide column">
+                <button class="fluid ui inverted big green right labeled submit icon button" tabindex="0">
+                    Termin anlegen
+                    <i class="right arrow icon"></i>
+                </button>
+            </div>
+        </div>
+        <div class="black one column row">
+            <div class="column">
+                <div class="inline fields">
+                    <div class="twelve wide field">
+
+                    </div>
+                    <div class="four wide field">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+
+
+    <div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                    <h4 class="modal-title" id="modal-title"></h4>
+                </div>
+                <div class="modal-body">
+                    <div class="ui stackable grid container">
+                        <div class="two column row">
+                            <div class="two wide column">
+                                <h5 class="ui orange small header">Datum</h5>
+                            </div>
+                            <div class="column">
+                                <div id="modal-start"></div>
+                            </div>
+                        </div>
+                        <div class="two column row">
+                            <div class="three wide column">
+                                <h5 class="ui orange small header">{{titleDescription}}</h5>
+                            </div>
+                            <div class="thirteen wide column">
+                                <div id="modal-description"></div>
+                            </div>
+                        </div>
+                        <div class="two column row">
+                            <div class="four wide column">
+                                <h5 class="ui orange small header">Verantwortlicher</h5>
+                            </div>
+                            <div class="twelve wide column">
+                                <div id="modal-members"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                    {{#if isInRole 'Admin'}}
+                        {{#if categorieIsOther}}
+                        <button type="button" class="btn btn-danger remove" data-dismiss="modal">Entfernen</button>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <style type='text/css'>
+        #calendar {
+            width: 900px;
+            margin: 0 auto;
+        }
+    </style>
+</template>

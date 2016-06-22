@@ -1,0 +1,31 @@
+<template name="progress">
+    <style>
+        .progress {background: rgba(173, 173, 173, 1); border: 0px solid rgba(255, 255, 255, 1); border-radius: 10px; height: 40px;}
+        .progress-bar-custom {background: rgb({{complete.r}}, {{complete.g}}, {{complete.b}});}
+    </style>
+
+    <div class="ui grid">
+        <div class="five column row">
+            <div class="four wide column"><h4 class="ui header">Bereit zur Produktion</h4></div>
+            <div class="eight wide column">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="{{complete.status}}" aria-valuemin="0" aria-valuemax="100" style="width: {{complete.status}}%;">
+                        <label class="ui small header">{{complete.status}}% Fortschritt</label>
+                    </div>
+                </div>
+            </div>
+            <div class="two wide column">
+            {{#if isInRole 'Admin'}}
+                <div class="ui {{isComplete.color}} bordered right labeled icon button" id="finish">
+                    {{isComplete.text}}
+                    <i class="checkmark box icon"></i>
+                </div>
+            {{/if}}
+            </div>
+
+            <div class="one wide column"></div>
+        </div>
+        <div class="row"></div>
+    </div>
+    <div class="ui divider"></div>
+</template>

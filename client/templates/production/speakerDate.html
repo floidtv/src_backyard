@@ -1,0 +1,45 @@
+<template name='speakerDate'>
+    <style>
+        .event a {
+            background-color: #42B373 !important;
+            background-image :none !important;
+            color: #ffffff !important;
+        }
+    </style>
+    <div class="row">
+        <div class="one wide column"></div>
+        <div class="fourteen wide column">
+            <div class="inline fields">
+                <div class="eight wide field">
+                    <label class="ui {{!--color this.id--}}orange small header">{{incremented this.index}}. Offtext-Termin</label>
+                    {{!--this.id--}}
+                </div>
+                <div class="thirteen wide field">
+                    <div class="form-group">
+                        <div class='input-group date speakerDatetimepicker'>
+                            <input id="speakerDateStart{{this.index}}" placeholder="Beginn" type='date' class="form-control" value="{{speakerDateStart}}" size="30px"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="thirteen wide field">
+                    <div class="form-group">
+                        <div class='input-group date speakerDatetimepicker'>
+                            <input placeholder="Ende" id="speakerDateEnd{{this.index}}" type='text' class="form-control" value="{{speakerDateEnd}}" size="30px"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="two wide field">
+                    <button class="ui red medium removeSpeakerDate button" value="{{this.id}}">
+                        <i class="minus icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

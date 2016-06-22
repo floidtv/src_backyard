@@ -1,0 +1,101 @@
+
+
+<template name="showProduction">
+
+    <style>
+        .ui.inverted.segment {background: rgb(43,43,43) !important;}
+    </style>
+    <div class="ui stackable celled grid container">
+        <div class="one column row">
+            <div class="bottom aligned column"><img class="ui medium right floated image" src="floid_logo.png"><h1 class="ui grey inverted large header">Projektübersicht</h1></div>
+        </div>
+        <div class="one column row">
+            <div class="column">
+    <table class="ui inverted table">
+        <thead>
+        <tr></tr>
+        <tr>
+            <th><h5 class="ui orange header">Titel</h5></th>
+            <th><h5 class="ui orange header">Thema</h5></th>
+            <th><h5 class="ui orange header">Format</h5></th>
+            <th><h5 class="ui orange header">Ausstrahlung</h5></th>
+            <th><h5 class="ui orange header">Teilnehmer</h5></th>
+            <th><h5 class="ui orange header">Aktionen</h5></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each production}}
+            <tr>
+                <td>
+                    {{#if userTagged}}
+                    <i class="green flag icon"></i>
+                    {{/if}}
+                    {{title}}
+                </td>
+                <td>{{thema}}</td>
+                <td>{{format}}</td>
+                <td>{{eventDate}}</td>
+                <td>{{userlist}}</td>
+                <div class="ui right floated buttons">
+                {{#if isInRole 'Admin'}}
+                    <button type="button" class="ui button red inverted remove_btn" data-toggle="modal" data-target="#confirm-delete" value="{{_id}}">entfernen</button>
+                {{/if}}
+                    <button type="button" class="ui button inverted show_btn" value="{{_id}}">anzeigen</button>
+                </div>
+            </tr>
+        {{/each}}
+        {{> detailProduction}}
+        </tbody>
+        <tfoot>
+        <tr><th>{{countActive}} aktive Produktionen</th>
+            <th>x in Archiv</th>
+            <th></th>
+        </tr></tfoot>
+    </table>
+                </div>
+            </div>
+    {{#if isInRole 'Admin'}}
+        <div class="one column row">
+            <div class="column">
+                <div class="ui inverted segment">
+                    <div class="ui inverted accordion">
+                        <div class="title">
+                            <i class="orange dropdown icon"></i><label class="ui orange header">Neue Produktion</label>
+                        </div>
+                        <div class="content">
+                            {{> addProduction}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/if}}
+    </div>
+
+{{>deleteConfirm}}
+
+</template>
+
+<!--Bestätigungs-Popup zum Entfernen-->
+<template name="deleteConfirm">
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" >&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Entfernen bestätigen</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Sind Sie sicher, dass Sie die folgende Produktion entfernen möchten?</p>
+                    <h4>{{prTitle}}</h4>
+                    <p>Willst du fortfahren?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
+                    <a class="btn btn-danger btn-ok">Entfernen</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

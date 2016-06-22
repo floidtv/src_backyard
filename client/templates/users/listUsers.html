@@ -1,0 +1,36 @@
+<template name="listUsers">
+    <div class="ui stackable grid container">
+        <div class="one column row">
+            <div class="column"></div>
+        </div>
+        <div class="black one column row">
+            <div class="column">
+                <h1 class="ui grey inverted centered large header">Benutzerübersicht</h1>
+            </div>
+        </div>
+        <div class="black one column row">
+            <div class="column">
+                <div class="ui inverted segment">
+                    <div class="ui celled list">
+                        {{#each user}}
+                        <div class="item">
+                            <!--<img class="ui avatar image" src="/images/avatar/small/tom.jpg">-->
+                            <div class="content">
+                                <div class="ui orange tiny header">{{userFname}} {{userLname}} ({{userEmail}})</div>
+                                {{usertype}} ({{verified}})
+                            </div>
+                            {{#if isInRole 'Admin'}}
+                                <div class="ui right floated buttons">
+                                    <button type="button" class="ui button red inverted remove_user_btn" value="{{userID}}">entfernen</button>
+                                    <button type="button" class="ui button black inverted verify_user_btn" value="{{userID}}">zulassen/sperren</button>
+                                    <button type="button" class="ui button black inverted editRole_btn" value="{{userID}}">befördern/degradieren</button>
+                                </div>
+                            {{/if}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</template>

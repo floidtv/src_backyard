@@ -1,0 +1,148 @@
+<template name="ideas" xmlns="http://www.w3.org/1999/html">
+    <style>
+        .bootstrap-datetimepicker-widget {
+            color: #000;
+        }
+    </style>
+
+    <div class="ui stackable grid container">
+        <div class="one column row">
+            <div class="column">
+
+            </div>
+        </div>
+        <div class="black one column row">
+            <div class="column">
+                <h1 class="ui grey inverted centered large header">Ideenentwicklung</h1>
+            </div>
+        </div>
+        <div class="black one column row">
+            <div class="column">
+
+                    <div class="ui inverted black accordion">
+                    {{#each ideas}}
+                        <div class="title">
+                            <div class="two columns">
+                                <div class="column">
+                                    <i class="dropdown icon"></i>
+                                    <label style="font-size: medium; color: darkorange">{{title}} ({{start}})</label>
+                                </div>
+                                <div class="column">
+                                    <label style="font-size: smaller">({{owner}}, erstellt am {{createdAt}} um {{createdAtTime}} Uhr)</label>
+                                    {{#if isInRole 'Admin'}}
+                                        <button class="ui green tiny button apply right floated" value="{{_id}}"><i class="share icon"></i></button>
+                                        <button class="ui red tiny button remove right floated" value="{{_id}}"><i class="remove icon"></i></button>
+                                    {{/if}}
+
+                                    <button class="ui blue tiny button like right floated" value="{{_id}}">{{likes}}&nbsp;&nbsp;<i class="thumbs outline up icon"></i></button>
+                                </div>
+                            </div>
+
+                            </div>
+
+                        <div class="content">
+                            <div class="column">
+                                {{description}}
+                            </div>
+                            <div class="ui minimal comments">
+                                <h3 class="ui orange dividing header">Kommentare</h3>
+                                {{#each comments _id}}
+                                <div class="comment">
+                                    {{#if isInRole 'Admin'}}
+                                    <div>
+                                        <button class="ui {{flagColor _id}} tiny button fav right floated" value="{{_id}}"><i class="star icon"></i></button>
+                                    </div>
+                                    {{/if}}
+                                    <div class="content">
+                                        <a class="author" style="color: orange">{{author}}</a>
+                                        <div class="metadata">
+                                            <span class="grey label date">{{createdAt}} um {{createdAtTime}} Uhr</span>
+                                        </div>
+                                        <div class="text" style="color: #fff">
+                                            {{text}}
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                {{/each}}
+                                <form class="ui reply form comment">
+                                    <div class="inline fields">
+                                    <div class="thirteen wide field">
+                                        <textarea placeholder="Dein Kommentar" id="comment" name="comment"></textarea>
+                                    </div>
+                                    <input type="hidden" name="ideaID" value="{{_id}}">
+                                    <input type="hidden" value="{{currentUser._id}}" name="authorID">
+                                    <div class="three wide field">
+                                        <input class="ui inverted orange right labeled icon button" type="submit" value="absenden">
+                                    </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    {{/each}}
+                    </div>
+
+            </div>
+        </div>
+    </div>
+
+        <form class="ui inverted form idea">
+            <div class="ui stackable grid container">
+            <div class="black one column row">
+                <div class="column">
+                    <h4 class="ui orange header">Neue Idee hinzufügen</h4>
+                </div>
+            </div>
+            <div class="black two column row">
+                <div class="twelve wide column">
+                    <h5 class="ui orange header">Titel</h5>
+                </div>
+                <div class="four wide column">
+                    <h5 class="ui orange small header">Datum</h5>
+                </div>
+            </div>
+            <div class="black two column row">
+                <div class="twelve wide column">
+                    <input name="ideaTitle" placeholder="Titel" type="text" value="">
+                </div>
+                <div class="four wide column">
+                    <input name="ideaDate" class="ui dropdown datetimepicker" type="text" id="ideaDate" placeholder="optional">
+                </div>
+            </div>
+            <div class="black two column row">
+                <div class="twelve wide column">
+                    <h5 class="ui orange small header">Beschreibung</h5>
+                </div>
+                <div class="four wide column">
+
+                </div>
+            </div>
+            <div class="black two column row">
+                <div class="twelve wide column">
+                    <textarea id="ideaDescription" name="ideaDescription" placeholder="Ideenbeschreibung"></textarea>
+                </div>
+                <div class="four wide column">
+                    <button class="fluid ui inverted big green right labeled submit icon button" tabindex="0">
+                        Idee anlegen
+                        <i class="right arrow icon"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="black one column row">
+                <div class="column">
+                    <div class="inline fields">
+                        <div class="twelve wide field">
+
+                        </div>
+                        <div class="four wide field">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+        </form>
+</template>

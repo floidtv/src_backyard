@@ -1,0 +1,191 @@
+<template name="treatmentView">
+    <form class="ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Exposé</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <label class="ui orange small header">Idee</label><br>
+                    {{production.idea}}
+                </div>
+            </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="seven wide column">
+                        <label class="ui orange small header">Offtext</label>
+                    </div>
+                    <div class="seven wide column">
+                        <label class="ui orange small header">Bilder</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="seven wide column">
+                        {{production.offtext}}
+                    </div>
+                    <div class="seven wide column">
+                        {{production.bildertext}}
+                    </div>
+                </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="five wide field">
+                            <label class="ui orange small header">Redakteur</label>
+                        </div>
+                        <div class="field">
+                            {{production.redakteur}}
+                        </div>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="field">
+                            <label class="ui orange small header">Fertigzustellen bis</label>
+                        </div>
+                        <div class="field">
+                            {{treatmentDate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="five wide field">
+                            <label class="ui orange small header">Einsprecher</label>
+                        </div>
+                        <div class="field">
+                            {{production.einsprecher}}
+                        </div>
+                    </div>
+                </div>
+                <div class="seven wide column"></div>
+            </div>
+            {{#each sprechertage}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three red wide field">
+                            <label class="ui orange small header">{{incremented  @index}}. Offtext-Termin</label>
+                        </div>
+                        <div class="four wide field">
+                            {{start}} Uhr
+                        </div>
+                        <div class="two wide field">
+                            bis
+                        </div>
+                        <div class="four wide field">
+                        {{end}} Uhr
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {{/each}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                        <div class="field">
+                            <label class="ui orange small header">Internetlinks</label>
+                        </div>
+                </div>
+                <div class="twelve wide column">
+                        <div class="field">
+                            {{production.hyperlinks}}
+                        </div>
+                </div>
+            </div>
+            {{#if oTonHasTagged}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">O-Ton</label>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="field">
+                        {{production.oTon}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Interviewpartner</label>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="field">
+                        {{production.iPartner}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Funktion</label>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="field">
+                        {{production.ipFunktion}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Kontaktdaten</label>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="field">
+                        {{production.ipKontakt}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Fragen</label>
+                    </div>
+                </div>
+                <div class="nine wide column">
+                    <div class="field">
+                        {{production.fragen}}
+                    </div>
+                </div>
+                <div class="one wide column">
+
+                </div>
+            </div>
+            {{/if}}
+            <div class="row">
+                <div class="twelve wide column"></div>
+                <div class="one wide column">
+                    <div class="field">
+                        <div class="ui orange right labeled icon medium button" id="editTreatment">
+                            Bearbeiten<i class="edit icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="ui divider"></div>
+</template>

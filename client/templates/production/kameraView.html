@@ -1,0 +1,178 @@
+<template name="kameraView">
+    <form class=" ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Kamera</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            {{#each kameraDates}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="three wide field">
+                        <label class="ui black small header">{{incremented @index}}. Drehtag</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Treffpunkt</label>
+                        </div>
+                        <div class="field">
+                            {{drehort}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="six wide field">
+                            <label class="ui orange small header">Start</label>
+                        </div>
+                        <div class="ten wide field">
+                            {{start}} Uhr
+                        </div>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="six wide field">
+                            <label class="ui orange small header">Ende</label>
+
+                        </div>
+                        <div class="ten wide field">
+                            {{end}} Uhr
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Kameramann 1</label>
+                        </div>
+                        <div class="four wide field">
+                            {{firstKamera}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Kameramann 2</label>
+                        </div>
+                        <div class="four wide field">
+                            {{secondKamera}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Kamera-Assistent</label>
+                        </div>
+                        <div class="four wide field">
+                            {{kameraassistent}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Tonmann/-frau</label>
+                        </div>
+                        <div class="four wide field">
+                            {{tonmann}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Ton-Assistent</label>
+                        </div>
+                        <div class="four wide field">
+                            {{tonassistent}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Lichttechnik</label>
+                        </div>
+                        <div class="four wide field">
+                            {{lichttechnik}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Licht-Assistent</label>
+                        </div>
+                        <div class="four wide field">
+                            {{lichtassistent}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Besonderheiten</label>
+                        </div>
+                        <div class="field">
+                            {{besonderheiten}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="eleven wide column"></div>
+                <div class="one wide column">
+                    <div class="field">
+                        <div class="ui orange right labeled icon medium button" id="editKamera">
+                            Bearbeiten<i class="edit icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</template>

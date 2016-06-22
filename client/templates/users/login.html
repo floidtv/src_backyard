@@ -1,0 +1,71 @@
+<template name="login" xmlns="http://www.w3.org/1999/html">
+    <style>
+        .ui.yellow.header {
+            color: #F39D00 !important;
+            font-size: 40px;
+        }
+    </style>
+    <div class="ui stackable grid container">
+        <div class="one column row">
+            <div class="bottom aligned column"><img class="ui medium right floated image" src="floid_logo.png"><div class="ui center aligned yellow huge header">ProductionManagement</div></div>
+        </div>
+        <div class="one column row">
+            <div class="column">
+            </div>
+        </div>
+    </div>
+    <form class="login">
+    <div class="ui five column centered inverted grid">
+        <div class="ui horizontal divider">
+            <label class="ui inverted grey small header">LOGIN</label>
+        </div>
+        <div class="ui form">
+            <div class="row">
+                <div class="left aligned column">
+                    <div class="field">
+                        <label class="ui left floated inverted grey small header">Email</label>
+                        <div class="ui left icon input">
+                            <input placeholder="Email" type="email" name="loginEmail">
+                            <i class="mail icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="ui left floated inverted grey small header">Passwort</label>
+                        <div class="ui left icon input">
+                            <input type="password" name="loginPassword" placeholder="Passwort">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="center aligned column"><br>
+                    <input class="ui big centered yellow button" type="submit" value="Login">
+                </div>
+            </div>
+        </div>
+        <div class="ui inverted horizontal divider">
+            oder
+        </div>
+        <div class="center aligned column">
+            <div class="ui big green labeled icon button show_regform">
+                <i class="signup icon"></i>
+                Registrieren
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header"></div>
+                <div class="modal-body">
+                    {{>signup}}
+                </div>
+                <div class="modal-footer"></div>
+            </div>
+        </div>
+    </div>
+</template>

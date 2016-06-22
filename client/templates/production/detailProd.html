@@ -1,0 +1,72 @@
+<!-- Pre-Popup-->
+<template name="detailProduction">
+    <script>
+        $('#multi-select')
+                .dropdown({
+                    allowAdditions: true,
+                    action: 'combo'
+                });
+    </script>
+
+    <div class="modal fade bs-modal-lg" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="prodModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+
+
+                {{#if prodHeaderIsInEdit}}
+                    {{>prodHeaderEdit}}
+                {{else}}
+                    {{>prodHeaderView}}
+                {{/if}}
+
+                {{#if hasTreatment}}
+                    {{#if treatmentIsInEdit}}
+                        {{>treatmentEdit}}
+                    {{else}}
+                        {{>treatmentView}}
+                    {{/if}}
+                {{/if}}
+
+                {{#if hasKamera}}
+                    {{#if kameraIsInEdit}}
+                        {{>kameraEdit}}
+                    {{else}}
+                        {{>kameraView}}
+                    {{/if}}
+                {{/if}}
+
+                {{#if hasSchnitt}}
+                    {{#if cutIsInEdit}}
+                        {{>cutEdit}}
+                    {{else}}
+                        {{>cutView}}
+                    {{/if}}
+                {{/if}}
+
+                {{#if hasOton}}
+                    {{#if audioIsInEdit}}
+                        {{>audioEdit}}
+                    {{else}}
+                        {{>audioView}}
+                    {{/if}}
+                {{/if}}
+
+                <div class="modal-footer">
+                    {{>progress}}
+
+                    <div class="actions">
+                        <div class="ui black bordered right labeled icon button" id="download">
+                            Export2PDF
+                            <i class="download icon"></i>
+                        </div>
+                        <div class="ui black right labeled icon button" id="close">
+                            Schließen
+                            <i class="checkmark icon"></i>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

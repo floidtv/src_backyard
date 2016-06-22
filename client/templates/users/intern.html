@@ -1,0 +1,55 @@
+<template name="intern">
+    <div class="ui centered grid">
+        <div class="row">
+            <div class="four wide column"></div>
+            <div class="eight wide center aligned black column">
+                <label class="ui large inverted grey header">Interner Bereich</label>
+            </div>
+            <div class="four wide column"></div>
+        </div>
+        <div class="row">
+            <div class="four wide column"></div>
+            <div class="eight wide black column">
+                <label class="ui small orange header">Neues Format hinzufügen:</label>
+            </div>
+            <div class="four wide column"></div>
+        </div>
+        <div class="row">
+            <div class="four wide column"></div>
+            <div class="eight wide black column">
+                <form class="ui form newFormat">
+                    <div class="inline fields">
+                        <div class="four wide field">
+                            <input id="newFormat" type="text" placeholder="Neues Format">
+                        </div>
+                        <div class="four wide field">
+                            <select name="formats" class="ui dropdown" id="formatSelect">
+                                {{#each formats}}
+                                    <option {{selected}} id="item" value="{{name}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="three wide field">
+                            <button class="ui positive medium button" id="addFormat">
+                                <i class="plus icon"></i>
+                            </button>
+                            <button class="ui negative medium button" id="removeFormat">
+                                <i class="minus icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="four wide column"></div>
+        </div>
+
+
+        <div class="ten wide column"></div>
+        <div class="six wide column"></div>
+        <div class="four wide column"></div>
+        <div class="twelve wide column"></div>
+        <div class="two wide column"></div>
+        <div class="fourteen wide column"></div>
+        <div class="sixteen wide column"></div>
+    </div>
+</template>

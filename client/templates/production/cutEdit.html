@@ -1,0 +1,125 @@
+<template name="cutEdit">
+    <form class="ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Schnitt</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="field">
+                            <label>Anzahl Schnitt-Termine</label>
+                        </div>
+                        <div class="field">
+                            <div class="ui negative medium button" id="decrementDate">
+                                <i class="minus icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                            {{anzCutDates}}
+                        </div>
+                        <div class="field">
+                            <div class="ui positive medium button" id="incrementDate">
+                                <i class="plus icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#each cutDates}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <label>Schnittraum</label>
+                    </div>
+                    <div class="field">
+                        <input id="schnittraum{{@index}}" value="{{schnittraum}}" placeholder="Schnittraum" type="text">
+                    </div>
+                    <div class="inline fields">
+                        <div class="seven wide field">
+                            <label>Start</label>
+                            <div class="form-group">
+                                <div class='input-group date cutDateStart' >
+                                    <input id="cutDateStart{{@index}}" type='text' class="form-control" value="{{start}}" size="30px"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="seven wide field">
+                            <label>Ende</label>
+                            <div class="form-group">
+                                <div class='input-group date cutDateEnd'>
+                                    <input id="cutDateEnd{{@index}}" type='text' class="form-control" value="{{end}}" size="30px"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label>Cutter</label>
+                        </div>
+                        {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                        <div class="four wide field">
+                            <select name="taggedUsers" class="ui dropdown" id="cutter{{@index}}">
+                                {{#each userList}}
+                                    <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="three wide field">
+                            <div class="ui positive medium button" id="addCutter" data-value="{{@index}}">
+                                <i class="add user icon"></i>
+                            </div>
+                            <div class="ui negative medium button" id="removeCutter" data-value="{{@index}}">
+                                <i class="remove user icon"></i>
+                            </div>
+                        </div>
+                        {{else}} <!-- andere Benutzerrechte-->
+                            {{#if userHasTaggedAsCutter @index}}
+                                <div class="ui negative medium button" id="add_removeCutter" data-value="{{@index}}">
+                                    <i class="remove user icon"></i>
+                                </div>
+                            {{else}}
+                                <div class="ui positive medium button" id="add_removeCutter" data-value="{{@index}}">
+                                    <i class="add user icon"></i>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                        {{cutterUser @index}}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <label>Besonderheiten</label>
+                        <textarea id="besonderheiten{{@index}}" placeholder="Besonderheiten">{{besonderheiten}}</textarea>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+
+            <div class="row">
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <input class="ui right floated green button" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>

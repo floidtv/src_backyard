@@ -1,0 +1,244 @@
+<template name="treatmentEdit">
+    <form class="ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Exposé</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Idee</label>
+                        <textarea name="idea" placeholder="Idee">{{production.idea}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Offtext</label>
+                        <textarea name="offtext" placeholder="Offtext">{{production.offtext}}</textarea>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Bilder</label>
+                        <textarea name="bildertext" placeholder="Bildertext">{{production.bildertext}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="four wide field">
+                            <label class="ui orange small header">Redakteur</label>
+
+                        </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="seven wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="multi-select">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addRedakteur">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeRedakteur">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsRedakteur}}
+                                    <div class="ui negative medium button" id="add_removeRedakteur">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeRedakteur">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+
+                    </div>
+                    {{production.redakteur}}
+                </div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="five wide field">
+                            <label class="ui orange small header">Fertigstellung bis</label>
+                        </div>
+                        <div class="eleven wide field">
+                            <div class="form-group">
+                                <div class='input-group date' id='redakteurDatetimepicker'>
+                                    <input name="treatmentDate" type='text' class="form-control" value="{{treatmentDate}}" size="30px"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="four wide field">
+                            <label class="ui orange small header">Einsprecher</label>
+                        </div>
+                        {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                            <div class="seven wide field">
+                                <select name="taggedUsers" class="ui dropdown" id="multi-select2">
+                                    {{#each userList}}
+                                        <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <div class="three wide field">
+                                <div class="ui positive medium button" id="addSpeaker">
+                                    <i class="add user icon"></i>
+                                </div>
+                                <div class="ui negative medium button" id="removeSpeaker">
+                                    <i class="remove user icon"></i>
+                                </div>
+                            </div>
+                        {{else}}
+                            {{#if userHasTaggedAsSpeaker}}
+                                <div class="ui negative medium button" id="add_removeSpeaker">
+                                    <i class="remove user icon"></i>
+                                </div>
+                            {{else}}
+                                <div class="ui positive medium button" id="add_removeSpeaker">
+                                    <i class="add user icon"></i>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+
+                    </div>
+                    {{production.einsprecher}}
+                </div>
+                <div class="seven wide column">
+                    <div class="inline fields">
+                        <div class="fourteen wide field">
+                            <label class="ui orange small header">Sprechertermin hinzufügen</label>
+                        </div>
+                        <div class="two wide field">
+                            <div class="ui orange medium button" id="addSpeakerDate">
+                                <i class="plus icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{#each sprechertage}}
+                {{>speakerDate index=@index speakerdate=this id=_id speakerDateStart=start speakerDateEnd=end}}
+            {{/each}}
+
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="two wide column">
+                    <div class="field">
+                        <label class="ui orange small header">Internetlinks</label>
+                    </div>
+                </div>
+                <div class="twelve wide column">
+                    <div class="field">
+                        <input name="hyperlinks" value="{{production.hyperlinks}}" placeholder="Hyperlinks" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="six wide column">
+                    <div class="inline fields">
+                        <div class="field">
+                            <label class="ui orange small header">O-Ton</label>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input name="oTon" class="oTonCheck" type="checkbox" {{oTonHasTagged}}>
+                                <label></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#if oTonHasTagged}}
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">
+                        <div class="field">
+                            <label class="ui orange small header">Interviewpartner</label>
+                        </div>
+                    </div>
+                    <div class="twelve wide column">
+                        <div class="field">
+                            <input name="iPartner" value="{{production.iPartner}}" placeholder="Interviewpartner" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">
+                        <div class="field">
+                            <label class="ui orange small header">Funktion</label>
+                        </div>
+                    </div>
+                    <div class="twelve wide column">
+                        <div class="field">
+                            <input name="ipFunktion" value="{{production.ipFunktion}}" placeholder="Funktion" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">
+                        <div class="field">
+                            <label class="ui orange small header">Kontaktdaten</label>
+                        </div>
+                    </div>
+                    <div class="twelve wide column">
+                        <div class="field">
+                            <input name="ipKontakt" value="{{production.ipKontakt}}" placeholder="Kontaktdaten" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="two wide column">
+                        <div class="field">
+                            <label class="ui orange small header">Fragen</label>
+                        </div>
+                    </div>
+                    <div class="nine wide column">
+                        <div class="field">
+                            <textarea name="fragen" placeholder="Fragen">{{production.fragen}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="field">
+                        <input class="ui right floated green button" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </form>
+</template>

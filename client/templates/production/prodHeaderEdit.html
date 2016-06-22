@@ -1,0 +1,74 @@
+<template name="prodHeaderEdit">
+     <div class="ui stackable grid container">
+         <div class="row"></div>
+         <div class="row">
+            <div class="one wide column"></div>
+            <div class="fourteen wide column">
+                <h3 class="ui dividing header">{{prTitle}}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="one wide column"></div>
+            <div class="fourteen wide column">
+                <form class="ui form">
+                    <div class="field">
+                        <label class="ui orange header">Titel</label>
+                        <input name="prodTitle" type="text" value="{{prTitle}}">
+                    </div>
+                    <div class="field">
+                        <label class="ui orange header">Thema</label>
+                        <input name="prodThema" type="text" value="{{prThema}}">
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label class="ui orange header">Format</label>
+                            <select name="prodFormat" class="ui dropdown">
+                                <option value="">Format</option>
+                                {{#each formats}}
+                                    <option {{selected}} id="item" value="{{name}}">{{name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label class="ui orange header">Enddatum</label>
+                            <input name="prodDate" class="ui fluid dropdown datetimepicker" type="text" value="{{prDate}}"/>
+                        </div>
+                    </div>
+                    <div class="three fields">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input name="hasTreatment" type="checkbox" {{hasTreatment}}>
+                            <label>Exposé</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input name="hasOfftext" type="checkbox" {{hasOfftext}}>
+                            <label>Offtext</label>
+                        </div>
+                    </div>
+                        </div>
+                    <div class="three fields">
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input name="hasKamera" type="checkbox" {{hasKamera}}>
+                            <label>Kamera</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui toggle checkbox">
+                            <input name="hasSchnitt" type="checkbox" {{hasSchnitt}}>
+                            <label>Schnitt</label>
+                        </div>
+                    </div>
+                        <div class="field">
+                            <input class="ui right floated green button" type="submit" value="speichern">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="ui divider"></div>
+</template>

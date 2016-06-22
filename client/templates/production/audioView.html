@@ -1,0 +1,52 @@
+<template name="audioView">
+    <form class=" ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Audio</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Campus Records Mitarbeiter</label>
+                        </div>
+                        <div class="four wide field">
+                            {{crUser}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="three wide field">
+                            <label class="ui orange small header">Besonderheiten</label>
+                        </div>
+                        <div class="field">
+                            {{production.audioBesonderheiten}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="eleven wide column"></div>
+                <div class="one wide column">
+                    <div class="field">
+                        <div class="ui orange right labeled icon medium button" id="editAudio">
+                            Bearbeiten<i class="edit icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</template>

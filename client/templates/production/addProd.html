@@ -1,0 +1,85 @@
+<template name="addProduction">
+<style>
+    .bootstrap-datetimepicker-widget {
+        color: #000;
+    }
+    .ui.inverted.form label, .ui.form .inverted.segment label,
+    .ui.form .inverted.segment .ui.checkbox label,
+    .ui.form .inverted.segment .ui.checkbox .box, .ui.inverted.form
+    .ui.checkbox label, .ui.inverted.form .ui.checkbox .box {
+        color: darkorange !important;
+    }
+    .ui.toggle.checkbox input:checked ~ .box, .ui.toggle.checkbox input:checked ~ label {
+        color: darkorange !important;
+    }
+    .ui.checkbox input:checked ~ .box::after, .ui.checkbox input:checked ~ label::after {
+        color: darkorange !important;
+    }
+</style>
+    <div class="ui stackable celled grid container">
+            <div class="one column row">
+                <div class="column">
+                    <form class="ui inverted form">
+                        <div class="field">
+                            <label class="ui orange header">Titel</label>
+                            <input name="prodTitle" placeholder="Titel" type="text">
+                        </div>
+                        <div class="field">
+                            <label class="ui orange header">Thema</label>
+                            <input name="prodThema" placeholder="Thema" type="text">
+                        </div>
+                        <div class="two fields">
+                            <div class="field">
+                                <label class="ui orange header">Format</label>
+                                <select name="prodFormat" class="ui dropdown">
+                                    <option value="">Format</option>
+                                    {{#each formats}}
+                                        <option {{selected}} id="item" value="{{name}}">{{name}}</option>
+                                    {{/each}}
+                                </select>
+                                <!--
+                            <select class="ui fluid dropdown" name="prodFormat">
+                                <option value="">Format</option>
+                                <option value="2">intern</option>
+                                <option value="1">extern</option>
+                                <option value="0">CampusCompact</option>
+                            </select>
+                            -->
+                            </div>
+                            <div class="field">
+                                <label class="ui orange header">Enddatum</label>
+                                <input name="prodDate" class="ui fluid dropdown datetimepicker" type="text"/>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input name="hasTreatment" type="checkbox" checked>
+                                <label>Exposé</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input name="hasOfftext" type="checkbox" checked>
+                                <label>Offtext</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input name="hasKamera" type="checkbox" checked>
+                                <label>Kamera</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input name="hasSchnitt" type="checkbox" checked>
+                                <label>Schnitt</label>
+                            </div>
+                        </div>
+                        <input class="ui button" type="submit" value="anlegen">
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+</template>

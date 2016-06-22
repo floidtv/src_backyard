@@ -1,0 +1,46 @@
+<template name="signup">
+    <form>
+        <div class="ui two column centered inverted grid">
+            <div class="ui horizontal divider">
+                <label class="black">Registrieren</label>
+            </div>
+            <div class="column">
+                <div class="ui form">
+                    <div class="field">
+                        <label>Vorname</label>
+                        <div class="ui left icon input">
+                            <input placeholder="Vorname" type="text" name="signupFirstname">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Nachname</label>
+                        <div class="ui left icon input">
+                            <input placeholder="Nachname" type="text" name="signupLastname">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Email</label>
+                        <div class="ui left icon input">
+                            <input placeholder="Email" type="email" name="signupEmail">
+                            <i class="mail icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Passwort</label>
+                        <div class="ui left icon input">
+                            <input type="password" name="signupPassword" placeholder="Passwort">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui inverted horizontal divider">
+                <div class="center aligned column">
+                    <input class="ui big green labeled icon button" type="submit" value="Jetzt registrieren">
+                </div>
+            </div>
+        </div>
+    </form>
+</template>

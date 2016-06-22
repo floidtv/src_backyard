@@ -1,0 +1,333 @@
+<template name="kameraEdit">
+    <form class="ui form">
+        <div class="ui stackable sixteen column grid">
+            <div class="row"></div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <h3 class="ui dividing header">Kamera</h3>
+                </div>
+                <div class="one wide column"></div>
+            </div>
+            <div class="row">
+                <div class="one wide column"></div>
+                <div class="fourteen wide column">
+                    <div class="inline fields">
+                        <div class="field">
+                            <label>Anzahl Drehtermine</label>
+                        </div>
+                        <div class="field">
+                            <div class="ui negative medium button" id="decrementDate">
+                                <i class="minus icon"></i>
+                            </div>
+                        </div>
+                        <div class="field">
+                        {{anzKameraDates}}
+                        </div>
+                        <div class="field">
+                            <div class="ui positive medium button" id="incrementDate">
+                                <i class="plus icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#each kameraDates}}
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="fourteen wide column">
+                        <div class="field">
+                            <label>Treffpunkt</label>
+                        </div>
+                        <div class="field">
+                            <input id="drehort{{@index}}" value="{{this.drehort}}" placeholder="Treffpunkt Drehort" type="text">
+                        </div>
+                        <div class="inline fields">
+                            <div class="seven wide field">
+                                <label>Start</label>
+                                <div class="form-group">
+                                    <div class='input-group date kameraDateStart'>
+                                        <input id="kameraDateStart{{@index}}" type='text' class="form-control" value="{{this.start}}" size="30px"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="seven wide field">
+                                <label>Ende</label>
+                                <div class="form-group">
+                                    <div class='input-group date kameraDateEnd' >
+                                        <input id="kameraDateEnd{{@index}}" type='text' class="form-control" value="{{this.end}}" size="30px"/>
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="kameraDateID{{@index}}" type="hidden" value="{{this._id}}">
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Kameramann 1</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="firstKamera{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addFirstKamera" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removefirstKamera" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsFirstKamera @index}}
+                                    <div class="ui negative medium button" id="add_removeFirstKamera" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeFirstKamera" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{firstKameraUser @index}}
+                        </div>
+
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Kameramann 2</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="secondKamera{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addSecondKamera" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeSecondKamera" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsSecondKamera @index}}
+                                    <div class="ui negative medium button" id="add_removeSecondKamera" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeSecondKamera" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{secondKameraUser @index}}
+                        </div>
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Kamera-Assistent</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="kameraassistent{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addKameraassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeKameraassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsKameraassistent @index}}
+                                    <div class="ui negative medium button" id="add_removeKameraassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeKameraassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{kameraAssistentUser @index}}
+                        </div>
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Tonmann/-frau</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="tonmann{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addTonmann" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeTonmann" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsTonmann @index}}
+                                    <div class="ui negative medium button" id="add_removeTonmann" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeTonmann" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{tonmannUser @index}}
+                        </div>
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Ton-Assistent</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="tonassistent{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addTonassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeTonassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsTonassistent @index}}
+                                    <div class="ui negative medium button" id="add_removeTonassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeTonassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{tonassistentUser @index}}
+                        </div>
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Lichttechnik</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="lichttechnik{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addLichttechnik" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeLichttechnik" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsLichttechnik @index}}
+                                    <div class="ui negative medium button" id="add_removeLichttechnik" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeLichttechnik" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{lichttechnikUser @index}}
+                        </div>
+
+                        <div class="inline fields">
+                            <div class="three wide field">
+                                <label>Licht-Assistent</label>
+                            </div>
+                            {{#if isInRole 'Admin'}} <!-- Wenn Nutzer ist Admin-->
+                                <div class="four wide field">
+                                    <select name="taggedUsers" class="ui dropdown" id="lichtassistent{{@index}}">
+                                        {{#each userList}}
+                                            <option {{selected}} id="item" value="{{this.profile.shortcode}}">{{this.profile.shortcode}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="three wide field">
+                                    <div class="ui positive medium button" id="addLichtassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                    <div class="ui negative medium button" id="removeLichtassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                </div>
+                            {{else}} <!-- andere Benutzerrechte-->
+                                {{#if userHasTaggedAsLichtassistent @index}}
+                                    <div class="ui negative medium button" id="add_removeLichtassistent" data-value="{{@index}}">
+                                        <i class="remove user icon"></i>
+                                    </div>
+                                {{else}}
+                                    <div class="ui positive medium button" id="add_removeLichtassistent" data-value="{{@index}}">
+                                        <i class="add user icon"></i>
+                                    </div>
+                                {{/if}}
+                            {{/if}}
+                            {{lichtassistentUser @index}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="one wide column"></div>
+                    <div class="fourteen wide column">
+                        <div class="field">
+                            <label>Besonderheiten</label>
+                            <textarea id="besonderheiten{{@index}}" placeholder="Besonderheiten">{{this.besonderheiten}}</textarea>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+
+
+
+            <div class="row">
+                <div class="fifteen wide column">
+                    <div class="field">
+                        <input class="ui right floated green button" type="submit" value="Speichern">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>
